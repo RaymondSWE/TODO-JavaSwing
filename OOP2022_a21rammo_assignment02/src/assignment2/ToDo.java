@@ -7,6 +7,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -41,6 +42,11 @@ public class ToDo implements TaskListener,ActionListener {
 	JLabel totalTasks;
 
 	int total = 0, completed = 0;
+ArrayList<Object> tasks=new ArrayList<Object>();
+ArrayList<Object> tasksAlphabetical=new ArrayList<Object>();
+ArrayList<Object> completedTasks=new ArrayList<Object>();
+ArrayList<Object> unCompletedTasks=new arrayList<Object>();
+
 
 	ToDo() {
 		totalTasks = new JLabel();
@@ -49,19 +55,15 @@ public class ToDo implements TaskListener,ActionListener {
 		JPanel top = new JPanel();
 		JPanel bottom = new JPanel();
 		mid = new JPanel();
-		
-
 		root.setLayout(new BoxLayout(root, BoxLayout.Y_AXIS));
 		top.setLayout(new BoxLayout(top, BoxLayout.X_AXIS));
 		mid.setLayout(new BoxLayout(mid, BoxLayout.Y_AXIS));
 		frame.setTitle("Task management");
-
 		top.add(HomeTaskbutton);
 		top.add(Box.createHorizontalStrut(10)); // works like margin from css
 		top.add(StudyTaskbutton);
 		top.add(Box.createHorizontalStrut(10));
 		top.add(CustomTaskbutton, BorderLayout.NORTH);
-
 		root.add(top);
 		root.add(mid);
 		frame.add(root);
@@ -69,10 +71,6 @@ public class ToDo implements TaskListener,ActionListener {
 		HomeTaskbutton.addActionListener(this);
 		StudyTaskbutton.addActionListener(this);
 		CustomTaskbutton.addActionListener(this);
-
-		
-
-		
 		root.add(bottom);
 		bottom.add(sortByAlfButton);
 		bottom.add(sortByCompButton);
@@ -89,6 +87,28 @@ public class ToDo implements TaskListener,ActionListener {
 		frame.setVisible(true); // makes the frame visible
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Exit when clicking on closing button (X)
 	}
+private void sortAlphabetically()
+{
+	Object temp;
+	if(!tasksAlphabetical.isEmpty())
+	tasksAlphabetical.clear();
+	tasksAlphabetical.addAll(tasks);
+	for(int i=0; i<tasksAlphabetical.size()-1; i++)
+	{
+		for(int j=i+1; i<tasksAlphabetical.size(); j++)
+		{
+			if(tasksAlphabetical[i].getText().compareTo(tasksAlphabetical[j]).getText()>0)
+			{
+				temp=tasksAlphabetical[i];
+tasksAlphabetical[i]=tasksAlphabetical[j];
+tasksAlphabetical[j]=temp;
+				
+			}
+
+		}
+
+	}
+}
 
 	public static void main(String[] args) {
 		
