@@ -124,7 +124,7 @@ private void sortAlphabetically()
 	@Override
 	public void taskCreated(Task t) {
 		// This call the gui component for every task created
-		tasks.add(t.getGuiComponent());
+		tasks.add(t);
 		mid.add(t.getGuiComponent());
 		frame.validate();
 
