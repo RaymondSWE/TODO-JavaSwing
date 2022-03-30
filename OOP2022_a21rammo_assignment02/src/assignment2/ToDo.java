@@ -69,14 +69,9 @@ public class ToDo implements TaskListener,ActionListener {
 		HomeTaskbutton.addActionListener(this);
 		StudyTaskbutton.addActionListener(this);
 		CustomTaskbutton.addActionListener(this);
-		frame.add(bottom);
-		root.add(sortByAlfButton);
-		root.add(sortByCompButton);
-		root.add(sortByTypeButton);
+
 		
-		/*frame.add(sortByCompButton);
-		frame.add(sortByAlfButton);
-		frame.add(sortByTypeButton);*/
+
 		
 		root.add(bottom);
 		bottom.add(sortByAlfButton);
@@ -87,7 +82,6 @@ public class ToDo implements TaskListener,ActionListener {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-
 
 		frame.setMinimumSize(new Dimension(450, 300));
 		frame.setLayout(new FlowLayout());
