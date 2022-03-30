@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
 
 import se.his.it401g.todo.HomeTask;
 import se.his.it401g.todo.StudyTask;
@@ -30,7 +32,9 @@ public class ToDo implements TaskListener,ActionListener {
 	JButton StudyTaskbutton = new JButton("New StudyTask");
 	JButton HomeTaskbutton = new JButton("New HomeTask");
 	JButton CustomTaskbutton = new JButton("New WorkTask");
-	JLabel titleText = new JLabel("To Do List");
+	JButton sortByAlfButton = new JButton("Sortering alfabetical");
+	JButton sortByCompButton = new JButton("Sortering by completed/uncompleted");
+	JButton sortByTypeButton = new JButton("Sortering by type");
 	Task homeTask, studyTask, customTask;
 	JFrame frame;
 	JPanel mid;
@@ -43,13 +47,14 @@ public class ToDo implements TaskListener,ActionListener {
 		frame = new JFrame(); // Creates a frame
 		JPanel root = new JPanel();
 		JPanel top = new JPanel();
+		JPanel bottom = new JPanel();
 		mid = new JPanel();
+		
 
 		root.setLayout(new BoxLayout(root, BoxLayout.Y_AXIS));
 		top.setLayout(new BoxLayout(top, BoxLayout.X_AXIS));
 		mid.setLayout(new BoxLayout(mid, BoxLayout.Y_AXIS));
 		frame.setTitle("Task management");
-		frame.add(titleText);
 
 		top.add(HomeTaskbutton);
 		top.add(Box.createHorizontalStrut(10)); // works like margin from css
@@ -64,6 +69,24 @@ public class ToDo implements TaskListener,ActionListener {
 		HomeTaskbutton.addActionListener(this);
 		StudyTaskbutton.addActionListener(this);
 		CustomTaskbutton.addActionListener(this);
+		frame.add(bottom);
+		root.add(sortByAlfButton);
+		root.add(sortByCompButton);
+		root.add(sortByTypeButton);
+		
+		/*frame.add(sortByCompButton);
+		frame.add(sortByAlfButton);
+		frame.add(sortByTypeButton);*/
+		
+		root.add(bottom);
+		bottom.add(sortByAlfButton);
+		bottom.add(sortByCompButton);
+		bottom.add(sortByTypeButton);
+		sortByTypeButton.setHorizontalAlignment(SwingConstants.LEFT);
+		sortByAlfButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 
 
 		frame.setMinimumSize(new Dimension(450, 300));
@@ -79,10 +102,9 @@ public class ToDo implements TaskListener,ActionListener {
 
 	}
 
-
+	// This is connected to the checkerbox where if the user clickes on it, the completed on statusbar increase with 1
 	@Override
 	public void taskCompleted(Task t) {
-		// This is connected to the checkerbox where if the user clickes on it, the completed on statusbar increase with 1
         this.completed++;
         totalTasks.setText("Total task completed: " + this.completed + "/" + this.total);
 	}
@@ -98,7 +120,6 @@ public class ToDo implements TaskListener,ActionListener {
 	public void taskCreated(Task t) {
 		// This call the gui component for every task created
 		mid.add(t.getGuiComponent());
-		//mid.add(Box.createVerticalStrut(10));
 		frame.validate();
 
 	}
