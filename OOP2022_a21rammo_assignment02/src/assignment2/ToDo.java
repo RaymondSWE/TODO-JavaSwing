@@ -122,7 +122,8 @@ private void sortAlphabetically()
 	}
 
 	@Override
-	public void taskCreated(Task t) {
+	public void taskCreated(Task t)
+	 {
 		// This call the gui component for every task created
 		tasks.add(t);
 		mid.add(t.getGuiComponent());
@@ -152,6 +153,7 @@ private void sortAlphabetically()
 		{
 			homeTask = new HomeTask();
 	     	homeTask.setTaskListener(this);
+			 tasks.add(homeTask);
 	        taskCreated(homeTask);
 	        this.total++;
 	        this.totalTasks.setText("Total task completed: " + this.completed + "/" + this.total);
@@ -160,6 +162,7 @@ private void sortAlphabetically()
 		if(whichButton.getSource().equals(StudyTaskbutton))
 		{
 			studyTask = new StudyTask();
+			tasks.add(studyTask);
 			studyTask.setTaskListener(this);
 			taskCreated(studyTask);
 	        this.total++;
@@ -169,6 +172,7 @@ private void sortAlphabetically()
 		if(whichButton.getSource().equals(CustomTaskbutton))
 		{
 			customTask = new CustomTask();
+			tasks.add(customTask);
 			taskCreated(customTask); // Has to refresh everytime clicking new task
 			customTask.setTaskListener(this);
 	        this.total++;
