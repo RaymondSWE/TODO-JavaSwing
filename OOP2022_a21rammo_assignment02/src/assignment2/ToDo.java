@@ -136,8 +136,8 @@ public class ToDo implements TaskListener, ActionListener {
 	public void taskCreated(Task t)
 	 {
 		// This call the gui component for every task created
-		tasks.add((Task) t.getGuiComponent());
-		tasks.add(t);
+		/*tasks.add((Task) t.getGuiComponent());
+		tasks.add(t); */
 		mid.add(t.getGuiComponent());
 		frame.validate();
 
