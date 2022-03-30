@@ -7,6 +7,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import javax.swing.Box;
@@ -44,8 +45,8 @@ public class ToDo implements TaskListener,ActionListener {
 	
 
 	int total = 0, completed = 0;
-ArrayList<Object> tasks=new ArrayList<HomeTask>();
-ArrayList<Object> tasksAlphabetical=new ArrayList<HomeTask>();
+ArrayList<Type> tasks=new ArrayList<HomeTask>();
+ArrayList<Type> tasksAlphabetical=new ArrayList<HomeTask>();
 ArrayList<Object> completedTasks=new ArrayList<Object>();
 ArrayList<Object> unCompletedTasks=new ArrayList<Object>();
 
