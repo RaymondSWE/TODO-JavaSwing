@@ -14,6 +14,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -34,18 +35,19 @@ public class ToDo implements TaskListener,ActionListener {
 	JButton HomeTaskbutton = new JButton("New HomeTask");
 	JButton CustomTaskbutton = new JButton("New WorkTask");
 	JButton sortByAlfButton = new JButton("Sortering alfabetical");
-	JButton sortByCompButton = new JButton("Sortering by completed/uncompleted");
-	JButton sortByTypeButton = new JButton("Sortering by type");
+	JButton sortByCompButton = new JButton("Sortering by completed");
+	JButton sortByTypeButton = new JButton("Unsorted");
 	Task homeTask, studyTask, customTask;
 	JFrame frame;
 	JPanel mid;
 	JLabel totalTasks;
+	
 
 	int total = 0, completed = 0;
 ArrayList<Object> tasks=new ArrayList<Object>();
 ArrayList<Object> tasksAlphabetical=new ArrayList<Object>();
 ArrayList<Object> completedTasks=new ArrayList<Object>();
-ArrayList<Object> unCompletedTasks=new arrayList<Object>();
+ArrayList<Object> unCompletedTasks=new ArrayList<Object>();
 
 
 	ToDo() {
@@ -55,6 +57,7 @@ ArrayList<Object> unCompletedTasks=new arrayList<Object>();
 		JPanel top = new JPanel();
 		JPanel bottom = new JPanel();
 		mid = new JPanel();
+
 		root.setLayout(new BoxLayout(root, BoxLayout.Y_AXIS));
 		top.setLayout(new BoxLayout(top, BoxLayout.X_AXIS));
 		mid.setLayout(new BoxLayout(mid, BoxLayout.Y_AXIS));
@@ -75,7 +78,6 @@ ArrayList<Object> unCompletedTasks=new arrayList<Object>();
 		bottom.add(sortByAlfButton);
 		bottom.add(sortByCompButton);
 		bottom.add(sortByTypeButton);
-		sortByTypeButton.setHorizontalAlignment(SwingConstants.LEFT);
 		sortByAlfButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -191,35 +193,5 @@ tasksAlphabetical.get(j)=temp;
 		
 	};
 	
-	/*
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-			homeTask = new HomeTask();
-	     	homeTask.setTaskListener(this);
-	        taskCreated(homeTask);
-	        this.total++;
-	        this.totalTasks.setText("Total task completed: " + this.completed + "/" + this.total);
-	        frame.validate();
-	}
-
-	public void actionPerformed1(ActionEvent e) {
-		studyTask = new StudyTask();
-		studyTask.setTaskListener(this);
-		taskCreated(studyTask);
-        this.total++;
-        this.totalTasks.setText("Total task completed: " + this.completed + "/" + this.total);
-        frame.validate();
-	}
-	
-	public void actionPerformed2(ActionEvent e) {
-		customTask = new CustomTask();
-		taskCreated(customTask); // Has to refresh everytime clicking new task
-		customTask.setTaskListener(this);
-        this.total++;
-        this.totalTasks.setText("Total task completed: " + this.completed + "/" + this.total);
-        frame.validate();
-	}
-	*/
 }
 
