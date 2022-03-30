@@ -91,25 +91,13 @@ ArrayList<Object> unCompletedTasks=new ArrayList<Object>();
 	}
 private void sortAlphabetically()
 {
-	Object temp;
 	if(!tasksAlphabetical.isEmpty())
 	tasksAlphabetical.clear();
 	tasksAlphabetical.addAll(tasks);
-	for(int i=0; i<tasksAlphabetical.size()-1; i++)
-	{
-		for(int j=i+1; i<tasksAlphabetical.size(); j++)
-		{
-			if(tasksAlphabetical.get(i).getText().compareTo(tasksAlphabetical.get(j).getText())>0)
-			{
-				temp=tasksAlphabetical.get(i);
-tasksAlphabetical.get(i)=tasksAlphabetical.get(j);
-tasksAlphabetical.get(j)=temp;
-				
-			}
+	tasksAlphabetical.sort((o1, o2)
+	-> o1.getText().compareTo(o2.getText())
+	);
 
-		}
-
-	}
 }
 
 	public static void main(String[] args) {
@@ -135,6 +123,7 @@ tasksAlphabetical.get(j)=temp;
 	@Override
 	public void taskCreated(Task t) {
 		// This call the gui component for every task created
+		tasks.add(t.getGuiComponent());
 		mid.add(t.getGuiComponent());
 		frame.validate();
 
