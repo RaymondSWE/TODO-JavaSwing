@@ -190,8 +190,9 @@ public class ToDo implements TaskListener, ActionListener {
 	}
 
 	@Override
-	public void taskChanged(Task t) {
-		// TODO Auto-generated method stub
+	public void taskChanged(Task t)
+	 {
+		
 
 	};
 
