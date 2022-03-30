@@ -133,7 +133,8 @@ public class ToDo implements TaskListener, ActionListener {
 	}
 
 	@Override
-	public void taskCreated(Task t) {
+	public void taskCreated(Task t)
+	 {
 		// This call the gui component for every task created
 		tasks.add((Task) t.getGuiComponent());
 		tasks.add(t);
@@ -153,6 +154,7 @@ public class ToDo implements TaskListener, ActionListener {
 		this.total--;
 		if (this.completed > 0) {
 			this.completed--;
+
 		}
 		totalTasks.setText("Total task completed: " + this.completed + "/" + this.total);
 		frame.validate();
@@ -169,6 +171,7 @@ public class ToDo implements TaskListener, ActionListener {
 		}
 		if (whichButton.getSource().equals(StudyTaskbutton)) {
 			studyTask = new StudyTask();
+			tasks.add(studyTask);
 			studyTask.setTaskListener(this);
 			taskCreated(studyTask);
 			this.total++;
@@ -177,6 +180,7 @@ public class ToDo implements TaskListener, ActionListener {
 		}
 		if (whichButton.getSource().equals(CustomTaskbutton)) {
 			customTask = new CustomTask();
+			tasks.add(customTask);
 			taskCreated(customTask); // Has to refresh everytime clicking new task
 			customTask.setTaskListener(this);
 			this.total++;
