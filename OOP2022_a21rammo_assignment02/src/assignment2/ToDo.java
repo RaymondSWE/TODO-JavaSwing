@@ -13,6 +13,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -33,12 +34,13 @@ public class ToDo implements TaskListener,ActionListener {
 	JButton HomeTaskbutton = new JButton("New HomeTask");
 	JButton CustomTaskbutton = new JButton("New WorkTask");
 	JButton sortByAlfButton = new JButton("Sortering alfabetical");
-	JButton sortByCompButton = new JButton("Sortering by completed/uncompleted");
-	JButton sortByTypeButton = new JButton("Sortering by type");
+	JButton sortByCompButton = new JButton("Sortering by completed");
+	JButton sortByTypeButton = new JButton("Unsorted");
 	Task homeTask, studyTask, customTask;
 	JFrame frame;
 	JPanel mid;
 	JLabel totalTasks;
+	
 
 	int total = 0, completed = 0;
 
@@ -49,6 +51,7 @@ public class ToDo implements TaskListener,ActionListener {
 		JPanel top = new JPanel();
 		JPanel bottom = new JPanel();
 		mid = new JPanel();
+		
 		
 
 		root.setLayout(new BoxLayout(root, BoxLayout.Y_AXIS));
@@ -77,7 +80,6 @@ public class ToDo implements TaskListener,ActionListener {
 		bottom.add(sortByAlfButton);
 		bottom.add(sortByCompButton);
 		bottom.add(sortByTypeButton);
-		sortByTypeButton.setHorizontalAlignment(SwingConstants.LEFT);
 		sortByAlfButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
