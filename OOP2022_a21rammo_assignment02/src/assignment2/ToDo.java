@@ -97,11 +97,11 @@ private void sortAlphabetically()
 	{
 		for(int j=i+1; i<tasksAlphabetical.size(); j++)
 		{
-			if(tasksAlphabetical[i].getText().compareTo(tasksAlphabetical[j]).getText()>0)
+			if(tasksAlphabetical.get(i).getText().compareTo(tasksAlphabetical.get(j)).getText()>0)
 			{
-				temp=tasksAlphabetical[i];
-tasksAlphabetical[i]=tasksAlphabetical[j];
-tasksAlphabetical[j]=temp;
+				temp=tasksAlphabetical.get(i);
+tasksAlphabetical.get(i)=tasksAlphabetical.get(j);
+tasksAlphabetical.get(j)=temp;
 				
 			}
 
