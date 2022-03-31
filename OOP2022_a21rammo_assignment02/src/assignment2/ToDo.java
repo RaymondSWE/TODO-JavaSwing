@@ -80,7 +80,7 @@ public class ToDo implements TaskListener, ActionListener {
 		sortByAlfButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				sortAlphabetically();
-				System.out.println(tasksAlphabetical.get(0).getText());
+				//System.out.println(tasksAlphabetical.get(0).getText());
 				System.out.println(tasks.get(0).getText());
 			}
 		});
