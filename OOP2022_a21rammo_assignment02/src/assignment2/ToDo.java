@@ -23,9 +23,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ListModel;
-import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
-import javax.swing.event.ListSelectionEvent;
 
 import se.his.it401g.todo.HomeTask;
 import se.his.it401g.todo.StudyTask;
@@ -56,7 +54,6 @@ public class ToDo implements TaskListener, ActionListener {
 	ArrayList<Task> tasksAlphabetical = new ArrayList<Task>();
 	ArrayList<Object> completedTasks = new ArrayList<Object>();
 	ArrayList<Object> unCompletedTasks = new ArrayList<Object>();
-JScrollPane pane=new JScrollPane(list);
 
 	ToDo() {
 		totalTasks = new JLabel();
@@ -95,7 +92,11 @@ JScrollPane pane=new JScrollPane(list);
 				// System.out.println(tasks.get(0).getText());
 				// System.out.println(homeTask.getText());
 				sortAlphabetically();
-frame.add(pane);
+				System.out.println(tasks.get(0).getText());
+				System.out.println(tasks.get(1).getText());
+				for (int i = 0; i < tasks.size(); i++) {
+					tasks.get(i).getText();
+				}
 			}
 		});
 
@@ -104,15 +105,14 @@ frame.add(pane);
 		frame.setBounds(100, 100, 400, 100); // size of frame
 		frame.setVisible(true); // makes the frame visible
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Exit when clicking on closing button (X)
-		list.setVisible(true);
-		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
 	}
 
-	private void sortAlphabetically() {
-
+	public void sortAlphabetically(Task t) {
+		tasksAlphabetical.addAll(tasks);
 		Collections.sort(tasks, new TaskTextComparator());
 		mid.removeAll();
+		mid.repaint();
+		mid.add(t.getGuiComponent());
 
 	}
 	
