@@ -39,9 +39,9 @@ public class ToDo implements TaskListener, ActionListener {
 	private JButton StudyTaskbutton = new JButton("New StudyTask");
 	private JButton HomeTaskbutton = new JButton("New HomeTask");
 	private JButton CustomTaskbutton = new JButton("New WorkTask");
-	private JButton sortByAlfButton = new JButton("Sortering alfabetical");
-	private JButton sortByCompButton = new JButton("Sortering by completed");
-	private JButton sortByTypeButton = new JButton("Unsorted");
+	private JButton sortByAlfButton = new JButton("Sorted Alfabetical");
+	private JButton sortByCompButton = new JButton("Sorterd Completed");
+	private JButton sortByTypeButton = new JButton("Sorted Type");
 	private Task homeTask, studyTask, customTask;
 	private JFrame frame;
 	private JPanel mid, top, bottom, root;
@@ -84,7 +84,13 @@ public class ToDo implements TaskListener, ActionListener {
 		StudyTaskbutton.addActionListener(this);
 		CustomTaskbutton.addActionListener(this);
 		root.add(bottom);
-		bottom.add(sortByAlfButton);
+		bottom.add(sortByTypeButton);
+		sortByTypeButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+	
 		bottom.add(sortByCompButton);
 		sortByCompButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -96,7 +102,7 @@ public class ToDo implements TaskListener, ActionListener {
 				}
 			}
 		});
-		bottom.add(sortByTypeButton);
+		bottom.add(sortByAlfButton);
 		sortByAlfButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -125,11 +131,11 @@ public class ToDo implements TaskListener, ActionListener {
 			if (tasks.get(i).isComplete())
 				completedTasks.add(tasks.get(i));
 		}
-	
-	for (int i = 0; i < tasks.size(); i++) {
-		if (!tasks.get(i).isComplete())
-			completedTasks.add(tasks.get(i));
-	}
+
+		for (int i = 0; i < tasks.size(); i++) {
+			if (!tasks.get(i).isComplete())
+				completedTasks.add(tasks.get(i));
+		}
 	}
 
 	public static void main(String[] args) {
