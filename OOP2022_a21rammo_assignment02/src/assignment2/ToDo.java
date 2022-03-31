@@ -89,8 +89,11 @@ private String chozenTaskType;
 		bottom.add(sortByTypeButton);
 		sortByTypeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String chozenTaskType = JOptionPane.showInputDialog(frame,
-                        "Choose your task(Study/Home/Work):", null);
+				mid.removeAll();
+				for(int i=0; i<taskTypes.size(); i++)
+				{
+					taskCreated(taskTypes.get(i));
+				}
 			}
 		});
 	
@@ -144,12 +147,17 @@ private void sortByType()
 {
 	for(int i=0; i<tasks.size(); i++)
 	{
-		if(tasks.get(i).getTaskType().equals(chozenTaskType))
+		if(tasks.get(i).getTaskType().equals("Home"))
 		taskTypes.add(tasks.get(i));
 	}
 	for(int i=0; i<tasks.size(); i++)
 	{
-		if(!tasks.get(i).getTaskType().equals(chozenTaskType))
+		if(tasks.get(i).getTaskType().equals("Study"))
+		taskTypes.add(tasks.get(i));
+	}
+	for(int i=0; i<tasks.size(); i++)
+	{
+		if(tasks.get(i).getTaskType().equals("Work"))
 		taskTypes.add(tasks.get(i));
 	}
 
