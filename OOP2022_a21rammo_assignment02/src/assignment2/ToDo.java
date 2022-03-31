@@ -52,8 +52,8 @@ public class ToDo implements TaskListener, ActionListener {
 	int total = 0, completed = 0;
 	ArrayList<Task> tasks = new ArrayList<Task>();
 	ArrayList<Task> tasksAlphabetical = new ArrayList<Task>();
-	ArrayList<Object> completedTasks = new ArrayList<Object>();
-	ArrayList<Object> unCompletedTasks = new ArrayList<Object>();
+	ArrayList<Task> completedTasks = new ArrayList<Task>();
+	ArrayList<Task> unCompletedTasks = new ArrayList<Task>();
 
 	ToDo() {
 		totalTasks = new JLabel();
@@ -91,7 +91,7 @@ public class ToDo implements TaskListener, ActionListener {
 				// System.out.println(tasks.get(0).getText());
 				// System.out.println(homeTask.getText());
 				sortAlphabetically();
-				for(int i=0;  i<Tasks.size(); i++)
+				for (int i=0; i<tasks.size(); i++)
 				{
 					taskCreated(tasks.get(i));
 
@@ -104,12 +104,11 @@ public class ToDo implements TaskListener, ActionListener {
 		frame.setBounds(100, 100, 400, 100); // size of frame
 		frame.setVisible(true); // makes the frame visible
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Exit when clicking on closing button (X)
-		list.setVisible(true);
 		
 	}
 
-	private void sortAlphabetically() {
-
+	private void sortAlphabetically()
+	 {
 		Collections.sort(tasks, new TaskTextComparator());
 		mid.removeAll();
 
