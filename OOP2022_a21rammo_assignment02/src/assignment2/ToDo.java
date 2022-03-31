@@ -83,9 +83,9 @@ public class ToDo implements TaskListener, ActionListener {
 		sortByCompButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mid.removeAll();
-				for (Task task : completedTasks)
+				for (int i=0; i<completedTasks.size(); i++)
 				 {
-					 taskCreated(task);
+					 taskCreated(completedTasks.get(i));
 					
 				}
 			}
