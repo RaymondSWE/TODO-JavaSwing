@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -78,7 +79,9 @@ public class ToDo implements TaskListener, ActionListener {
 		bottom.add(sortByCompButton);
 		bottom.add(sortByTypeButton);
 		sortByAlfButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {;
+
+			public void actionPerformed(ActionEvent e) {
+				;
 				// System.out.println(tasksAlphabetical.get(0).getText());
 				// System.out.println(tasks.get(0).getText());
 				System.out.println(tasks.size());
@@ -95,9 +98,11 @@ public class ToDo implements TaskListener, ActionListener {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Exit when clicking on closing button (X)
 	}
 
-	private void sortAlphabetically() {
-		System.out.println("sorting was called");
-		tasks.sort((o1, o2) -> o1.getText().compareTo(o2.getText()));
+	private void sortAlphabetically()
+	 {
+		tasksAlphabetical.addAll(tasks);
+		Collections.sort(tasksAlphabetical, new TaskTextComparator());
+		
 		mid.removeAll();
 		/*
 		 * for(int i = 0; i < tasks.size(); i++) {
@@ -172,7 +177,7 @@ public class ToDo implements TaskListener, ActionListener {
 		}
 		if (whichButton.getSource().equals(StudyTaskbutton)) {
 			studyTask = new StudyTask();
-			tasks.add(studyTask);
+			// tasks.add(studyTask);
 			studyTask.setTaskListener(this);
 			taskCreated(studyTask);
 			this.total++;
