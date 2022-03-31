@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -81,7 +82,8 @@ public class ToDo implements TaskListener, ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				sortAlphabetically();
 				//System.out.println(tasksAlphabetical.get(0).getText());
-				System.out.println(tasks.get(0).getText());
+				//System.out.println(tasks.get(0).getText());
+				
 			}
 		});
 
@@ -94,11 +96,9 @@ public class ToDo implements TaskListener, ActionListener {
 
 	private void sortAlphabetically()
 	 {
-		 System.out.println("sorting was called");
-		if (!tasks.isEmpty())
-			tasks.clear();
-		tasks.addAll(tasks);
-		tasks.sort((o1, o2) -> o1.getText().toLowerCase().compareTo(o2.getText().toLowerCase()));
+		tasksAlphabetical.addAll(tasks);
+		Collections.sort(tasksAlphabetical, new TaskTextComparator());
+		
 		mid.removeAll();
 		/*for(int i = 0; i < tasks.size(); i++) {
 			mid.add(tasks.get(i).getGuiComponent());
@@ -174,7 +174,7 @@ public class ToDo implements TaskListener, ActionListener {
 		}
 		if (whichButton.getSource().equals(StudyTaskbutton)) {
 			studyTask = new StudyTask();
-			tasks.add(studyTask);
+			// tasks.add(studyTask);
 			studyTask.setTaskListener(this);
 			taskCreated(studyTask);
 			this.total++;
