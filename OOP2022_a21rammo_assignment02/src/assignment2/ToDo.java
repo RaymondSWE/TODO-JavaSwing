@@ -80,8 +80,8 @@ public class ToDo implements TaskListener, ActionListener {
 		sortByAlfButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				sortAlphabetically();
-				System.out.println(tasksAlphabetical);
-				System.out.println(tasks);
+				System.out.println(tasksAlphabetical.get(0).getText());
+				System.out.println(tasks.get(0).getText());
 			}
 		});
 
@@ -92,7 +92,9 @@ public class ToDo implements TaskListener, ActionListener {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Exit when clicking on closing button (X)
 	}
 
-	private void sortAlphabetically() {
+	private void sortAlphabetically()
+	 {
+		 System.out.println("sorting was called");
 		if (!tasks.isEmpty())
 			tasks.clear();
 		tasks.addAll(tasks);
@@ -163,6 +165,7 @@ public class ToDo implements TaskListener, ActionListener {
 	public void actionPerformed(ActionEvent whichButton) {
 		if (whichButton.getSource().equals(HomeTaskbutton)) {
 			homeTask = new HomeTask();
+			System.out.println(tasks.add(tasks));
 			homeTask.setTaskListener(this);
 			taskCreated(homeTask);
 			this.total++;
