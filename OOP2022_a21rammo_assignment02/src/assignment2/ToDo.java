@@ -88,8 +88,10 @@ private String chozenTaskType;
 		root.add(bottom);
 		bottom.add(sortByTypeButton);
 		sortByTypeButton.addActionListener(new ActionListener() {
+		
 			public void actionPerformed(ActionEvent e) {
 				mid.removeAll();
+
 				for(int i=0; i<taskTypes.size(); i++)
 				{
 					taskCreated(taskTypes.get(i));
@@ -145,19 +147,22 @@ private String chozenTaskType;
 	}
 private void sortByType()
 {
+	String studyType="Study";
+	String homeType="Home";
+	String customType="Work";
 	for(int i=0; i<tasks.size(); i++)
 	{
-		if(tasks.get(i).getTaskType().equals("Home"))
+		if(tasks.get(i).getTaskType().equals(homeType))
 		taskTypes.add(tasks.get(i));
 	}
 	for(int i=0; i<tasks.size(); i++)
 	{
-		if(tasks.get(i).getTaskType().equals("Study"))
+		if(tasks.get(i).getTaskType().equals(customType))
 		taskTypes.add(tasks.get(i));
 	}
 	for(int i=0; i<tasks.size(); i++)
 	{
-		if(tasks.get(i).getTaskType().equals("Work"))
+		if(tasks.get(i).getTaskType().equals(studyType))
 		taskTypes.add(tasks.get(i));
 	}
 
