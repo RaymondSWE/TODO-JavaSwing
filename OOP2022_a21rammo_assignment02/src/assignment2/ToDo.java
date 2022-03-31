@@ -49,9 +49,10 @@ public class ToDo implements TaskListener, ActionListener {
 
 	private int total = 0, completed = 0;
 	private ArrayList<Task> tasks = new ArrayList<Task>();
-	private ArrayList<Task> tasksAlphabetical = new ArrayList<Task>();
+	private ArrayList<Task> taskTypes = new ArrayList<Task>();
 	private ArrayList<Task> completedTasks = new ArrayList<Task>();
 	private ArrayList<Task> unCompletedTasks = new ArrayList<Task>();
+private String chozenTaskType;
 
 	ToDo() {
 		totalTasks = new JLabel();
@@ -131,6 +132,20 @@ public class ToDo implements TaskListener, ActionListener {
 			completedTasks.add(tasks.get(i));
 	}
 	}
+private void sortByType()
+{
+	for(int i=0; i<tasks.size(); i++)
+	{
+		if(tasks.get(i).getTaskType().equals(chozenTaskType))
+		taskTypes.add(tasks.get(i));
+	}
+	for(int i=0; i<tasks.size(); i++)
+	{
+		if(!tasks.get(i).getTaskType().equals(chozenTaskType))
+		taskTypes.add(tasks.get(i));
+	}
+
+}
 
 	public static void main(String[] args) {
 
