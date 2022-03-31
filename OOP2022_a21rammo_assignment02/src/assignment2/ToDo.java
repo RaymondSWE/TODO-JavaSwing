@@ -23,9 +23,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ListModel;
-import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
-import javax.swing.event.ListSelectionEvent;
 
 import se.his.it401g.todo.HomeTask;
 import se.his.it401g.todo.StudyTask;
@@ -62,7 +60,6 @@ public class ToDo implements TaskListener, ActionListener {
 		JPanel top = new JPanel();
 		JPanel bottom = new JPanel();
 		mid = new JPanel();
-		
 
 		root.setLayout(new BoxLayout(root, BoxLayout.Y_AXIS));
 		top.setLayout(new BoxLayout(top, BoxLayout.X_AXIS));
@@ -83,18 +80,19 @@ public class ToDo implements TaskListener, ActionListener {
 		root.add(bottom);
 		bottom.add(sortByAlfButton);
 		bottom.add(sortByCompButton);
+		sortByCompButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		bottom.add(sortByTypeButton);
 		sortByAlfButton.addActionListener(new ActionListener() {
-
+			
 			public void actionPerformed(ActionEvent e) {
-				// System.out.println(tasksAlphabetical.get(0).getText());
-				// System.out.println(tasks.get(0).getText());
-				// System.out.println(homeTask.getText());
+				mid.removeAll();
 				sortAlphabetically();
-				for (int i=0; i<tasks.size(); i++)
-				{
+				for (int i = 0; i < tasks.size(); i++) {
 					taskCreated(tasks.get(i));
-
 				}
 			}
 		});
@@ -104,16 +102,16 @@ public class ToDo implements TaskListener, ActionListener {
 		frame.setBounds(100, 100, 400, 100); // size of frame
 		frame.setVisible(true); // makes the frame visible
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Exit when clicking on closing button (X)
-		
+
 	}
 
-	private void sortAlphabetically()
-	 {
+	public void sortAlphabetically() {
+		tasksAlphabetical.addAll(tasks);
+>>>>>>> d3371be44a43858126291517c0849e3c21cd6aee
 		Collections.sort(tasks, new TaskTextComparator());
 		mid.removeAll();
-
 	}
-	
+
 	public static void main(String[] args) {
 
 		ToDo t = new ToDo();
