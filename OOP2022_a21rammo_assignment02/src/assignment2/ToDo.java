@@ -48,15 +48,12 @@ public class ToDo implements TaskListener, ActionListener {
 	JFrame frame;
 	JPanel mid;
 	JLabel totalTasks;
-	private JList list = new JList();
-	private DefaultListModel listModel = new DefaultListModel();
 
 	int total = 0, completed = 0;
 	ArrayList<Task> tasks = new ArrayList<Task>();
 	ArrayList<Task> tasksAlphabetical = new ArrayList<Task>();
 	ArrayList<Object> completedTasks = new ArrayList<Object>();
 	ArrayList<Object> unCompletedTasks = new ArrayList<Object>();
-JScrollPane pane=new JScrollPane(list);
 
 	ToDo() {
 		totalTasks = new JLabel();
@@ -80,7 +77,6 @@ JScrollPane pane=new JScrollPane(list);
 		root.add(mid);
 		frame.add(root);
 		frame.add(totalTasks);
-		mid.add(list);
 		HomeTaskbutton.addActionListener(this);
 		StudyTaskbutton.addActionListener(this);
 		CustomTaskbutton.addActionListener(this);
@@ -105,8 +101,7 @@ frame.add(pane);
 		frame.setVisible(true); // makes the frame visible
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Exit when clicking on closing button (X)
 		list.setVisible(true);
-		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
+		
 	}
 
 	private void sortAlphabetically() {
@@ -116,15 +111,6 @@ frame.add(pane);
 
 	}
 	
-	private void addtoListModel() {
-		for (int i = 0; i < tasks.size(); i++) {
-			listModel.addElement(tasks.get(i));
-			listModel.addElement(tasks.get(i).getGuiComponent());
-			mid.validate();
-		}
-		list.setModel(listModel);
-	}
-
 	public static void main(String[] args) {
 
 		ToDo t = new ToDo();
