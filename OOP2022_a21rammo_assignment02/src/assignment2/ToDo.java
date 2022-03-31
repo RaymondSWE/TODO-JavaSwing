@@ -78,7 +78,6 @@ public class ToDo implements TaskListener, ActionListener {
 		top.add(CustomTaskbutton, BorderLayout.NORTH);
 		root.add(top);
 		root.add(mid);
-		root.add(scrollWheel);
 		frame.add(root);
 		frame.add(totalTasks);
 		HomeTaskbutton.addActionListener(this);
@@ -90,6 +89,7 @@ public class ToDo implements TaskListener, ActionListener {
 		sortByCompButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mid.removeAll();
+				sortCompleted();
 				for (int i = 0; i < completedTasks.size(); i++) {
 					taskCreated(completedTasks.get(i));
 
