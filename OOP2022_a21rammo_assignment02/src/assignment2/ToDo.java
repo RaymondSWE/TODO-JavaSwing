@@ -80,10 +80,16 @@ public class ToDo implements TaskListener, ActionListener {
 		root.add(bottom);
 		bottom.add(sortByAlfButton);
 		bottom.add(sortByCompButton);
+		sortByCompButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		bottom.add(sortByTypeButton);
 		sortByAlfButton.addActionListener(new ActionListener() {
-
+			
 			public void actionPerformed(ActionEvent e) {
+				mid.removeAll();
 				sortAlphabetically();
 				for (int i = 0; i < tasks.size(); i++) {
 					taskCreated(tasks.get(i));
