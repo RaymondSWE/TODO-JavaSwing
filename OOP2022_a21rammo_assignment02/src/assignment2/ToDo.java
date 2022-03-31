@@ -14,6 +14,7 @@ import java.util.Comparator;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -21,6 +22,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.ListModel;
 import javax.swing.SwingConstants;
 
 import se.his.it401g.todo.HomeTask;
@@ -44,6 +46,8 @@ public class ToDo implements TaskListener, ActionListener {
 	JFrame frame;
 	JPanel mid;
 	JLabel totalTasks;
+	private JList list = new JList();
+	private DefaultListModel listModel = new DefaultListModel();
 
 	int total = 0, completed = 0;
 	ArrayList<Task> tasks = new ArrayList<Task>();
@@ -58,6 +62,7 @@ public class ToDo implements TaskListener, ActionListener {
 		JPanel top = new JPanel();
 		JPanel bottom = new JPanel();
 		mid = new JPanel();
+		
 
 		root.setLayout(new BoxLayout(root, BoxLayout.Y_AXIS));
 		top.setLayout(new BoxLayout(top, BoxLayout.X_AXIS));
@@ -72,6 +77,7 @@ public class ToDo implements TaskListener, ActionListener {
 		root.add(mid);
 		frame.add(root);
 		frame.add(totalTasks);
+		mid.add(list);
 		HomeTaskbutton.addActionListener(this);
 		StudyTaskbutton.addActionListener(this);
 		CustomTaskbutton.addActionListener(this);
@@ -82,16 +88,14 @@ public class ToDo implements TaskListener, ActionListener {
 		sortByAlfButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				;
 				// System.out.println(tasksAlphabetical.get(0).getText());
 				// System.out.println(tasks.get(0).getText());
 				// System.out.println(homeTask.getText());
+				sortAlphabetically();
 				System.out.println(tasks.get(0).getText());
 				System.out.println(tasks.get(1).getText());
-				for (int i = 0; i < tasks.size(); i++)
-				 {
-					System.out.println(tasks.get(i).getText());
-
+				for (int i = 0; i < tasks.size(); i++) {
+					tasks.get(i).getText();
 				}
 			}
 		});
@@ -103,21 +107,20 @@ public class ToDo implements TaskListener, ActionListener {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Exit when clicking on closing button (X)
 	}
 
-	private void sortAlphabetically()
-	 {
-		 Collections.sort(tasks, new TaskTextComparator());
-		Collections.sort(tasks, new Comparator<Task>()
-		 {
-			public int compare(Task o1, Task o2)
-			{
-				//Task task1=(Task) o1;
-				//Task task2=(Task) o2;
-				return o1.getText().compareTo(o2.getText());
-			}
-		});
+	private void sortAlphabetically() {
 
+		Collections.sort(tasks, new TaskTextComparator());
 		mid.removeAll();
 
+	}
+	
+	private void addtoListModel() {
+		for (int i = 0; i < tasks.size(); i++) {
+			listModel.addElement(tasks.get(i));
+			listModel.addElement(tasks.get(i).getGuiComponent());
+			mid.validate();
+		}
+		list.setModel(listModel);
 	}
 
 	public static void main(String[] args) {
@@ -145,9 +148,6 @@ public class ToDo implements TaskListener, ActionListener {
 	@Override
 	public void taskCreated(Task t) {
 		// This call the gui component for every task created
-		/*
-		 * tasks.add((Task) t.getGuiComponent()); tasks.add(t);
-		 */
 		mid.add(t.getGuiComponent());
 		frame.validate();
 
@@ -174,7 +174,7 @@ public class ToDo implements TaskListener, ActionListener {
 		if (whichButton.getSource().equals(HomeTaskbutton)) {
 			homeTask = new HomeTask();
 			tasks.add(homeTask);
-			
+
 			homeTask.setTaskListener(this);
 			taskCreated(homeTask);
 			this.total++;
