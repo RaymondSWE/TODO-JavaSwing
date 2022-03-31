@@ -78,10 +78,13 @@ public class ToDo implements TaskListener, ActionListener {
 		bottom.add(sortByCompButton);
 		bottom.add(sortByTypeButton);
 		sortByAlfButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				sortAlphabetically();
-				//System.out.println(tasksAlphabetical.get(0).getText());
-				System.out.println(tasks.get(0).getText());
+			public void actionPerformed(ActionEvent e) {;
+				// System.out.println(tasksAlphabetical.get(0).getText());
+				// System.out.println(tasks.get(0).getText());
+				System.out.println(tasks.size());
+				for (int i = 0; i < tasksAlphabetical.size(); i++) {
+					System.out.println(tasksAlphabetical.get(i).getText());
+				}
 			}
 		});
 
@@ -92,24 +95,19 @@ public class ToDo implements TaskListener, ActionListener {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Exit when clicking on closing button (X)
 	}
 
-	private void sortAlphabetically()
-	 {
-		 System.out.println("sorting was called");
-		if (!tasks.isEmpty())
-			tasks.clear();
-		tasks.addAll(tasks);
-		tasks.sort((o1, o2) -> o1.getText().toLowerCase().compareTo(o2.getText().toLowerCase()));
+	private void sortAlphabetically() {
+		System.out.println("sorting was called");
+		tasks.sort((o1, o2) -> o1.getText().compareTo(o2.getText()));
 		mid.removeAll();
-		/*for(int i = 0; i < tasks.size(); i++) {
-			mid.add(tasks.get(i).getGuiComponent());
-		}*/ 
+		/*
+		 * for(int i = 0; i < tasks.size(); i++) {
+		 * mid.add(tasks.get(i).getGuiComponent()); }
+		 */
 
 	}
-	
-	
-	
+
 	private void unSorted() {
-		
+
 	}
 
 	public static void main(String[] args) {
@@ -135,11 +133,11 @@ public class ToDo implements TaskListener, ActionListener {
 	}
 
 	@Override
-	public void taskCreated(Task t)
-	 {
+	public void taskCreated(Task t) {
 		// This call the gui component for every task created
-		/*tasks.add((Task) t.getGuiComponent());
-		tasks.add(t); */
+		/*
+		 * tasks.add((Task) t.getGuiComponent()); tasks.add(t);
+		 */
 		mid.add(t.getGuiComponent());
 		frame.validate();
 
@@ -193,9 +191,7 @@ public class ToDo implements TaskListener, ActionListener {
 	}
 
 	@Override
-	public void taskChanged(Task t)
-	 {
-		
+	public void taskChanged(Task t) {
 
 	};
 
