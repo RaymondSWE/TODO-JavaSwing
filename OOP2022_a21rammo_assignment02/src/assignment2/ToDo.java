@@ -19,6 +19,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -88,7 +89,8 @@ private String chozenTaskType;
 		bottom.add(sortByTypeButton);
 		sortByTypeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				String chozenTaskType = JOptionPane.showInputDialog(frame,
+                        "Choose your task(Study/Home/Work):", null);
 			}
 		});
 	
