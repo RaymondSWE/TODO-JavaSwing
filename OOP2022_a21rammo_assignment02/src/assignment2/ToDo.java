@@ -165,7 +165,7 @@ public class ToDo implements TaskListener, ActionListener {
 	public void actionPerformed(ActionEvent whichButton) {
 		if (whichButton.getSource().equals(HomeTaskbutton)) {
 			homeTask = new HomeTask();
-			System.out.println(tasks.add(tasks));
+			System.out.println(tasks.add(homeTask));
 			homeTask.setTaskListener(this);
 			taskCreated(homeTask);
 			this.total++;
