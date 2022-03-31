@@ -82,7 +82,12 @@ public class ToDo implements TaskListener, ActionListener {
 		bottom.add(sortByCompButton);
 		sortByCompButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				mid.removeAll();
+				for (Task task : completedTasks)
+				 {
+					 taskCreated(task);
+					
+				}
 			}
 		});
 		bottom.add(sortByTypeButton);
@@ -105,12 +110,18 @@ public class ToDo implements TaskListener, ActionListener {
 
 	}
 
-	public void sortAlphabetically() {
-		tasksAlphabetical.addAll(tasks);
->>>>>>> d3371be44a43858126291517c0849e3c21cd6aee
+	public void sortAlphabetically()
+	 {
 		Collections.sort(tasks, new TaskTextComparator());
-		mid.removeAll();
 	}
+private void sortCompleted()
+{
+	for(int i=0; i<tasks.size(); i++)
+	{
+		if(tasks.get(i).isComplete())
+		unCompletedTasks.add(tasks.get(i));
+	}
+}
 
 	public static void main(String[] args) {
 
