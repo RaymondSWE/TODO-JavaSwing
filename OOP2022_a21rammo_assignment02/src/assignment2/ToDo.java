@@ -84,19 +84,10 @@ public class ToDo implements TaskListener, ActionListener {
 		sortByAlfButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				// System.out.println(tasksAlphabetical.get(0).getText());
-				// System.out.println(tasks.get(0).getText());
-				// System.out.println(homeTask.getText());
 				sortAlphabetically();
-
-				System.out.println(tasks.get(0).getText());
-				System.out.println(tasks.get(1).getText());
-
 				for (int i = 0; i < tasks.size(); i++) {
 					taskCreated(tasks.get(i));
-
 				}
-
 			}
 		});
 
@@ -112,8 +103,6 @@ public class ToDo implements TaskListener, ActionListener {
 		tasksAlphabetical.addAll(tasks);
 		Collections.sort(tasks, new TaskTextComparator());
 		mid.removeAll();
-		// mid.repaint();
-
 	}
 
 	public static void main(String[] args) {
