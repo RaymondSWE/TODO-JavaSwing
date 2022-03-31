@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -104,9 +105,17 @@ public class ToDo implements TaskListener, ActionListener {
 
 	private void sortAlphabetically()
 	 {
-		tasksAlphabetical.addAll(tasks);
-		Collections.sort(tasks, new TaskTextComparator());
-		
+		 Collections.sort(tasks, new TaskTextComparator());
+		Collections.sort(tasks, new Comparator<Task>()
+		 {
+			public int compare(Task o1, Task o2)
+			{
+				//Task task1=(Task) o1;
+				//Task task2=(Task) o2;
+				return o1.getText().compareTo(o2.getText());
+			}
+		});
+
 		mid.removeAll();
 
 	}
