@@ -47,11 +47,13 @@ public class ToDo implements TaskListener, ActionListener {
 	private JPanel mid, top, bottom, root;
 	private JLabel totalTasks;
 
+
 	private int total = 0, completed = 0;
 	private ArrayList<Task> tasks = new ArrayList<Task>();
 	private ArrayList<Task> tasksAlphabetical = new ArrayList<Task>();
 	private ArrayList<Object> completedTasks = new ArrayList<Object>();
 	private ArrayList<Object> unCompletedTasks = new ArrayList<Object>();
+
 
 	ToDo() {
 		totalTasks = new JLabel();
@@ -88,7 +90,12 @@ public class ToDo implements TaskListener, ActionListener {
 		bottom.add(sortByCompButton);
 		sortByCompButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				mid.removeAll();
+				for (Object task : completedTasks)
+				 {
+					 taskCreated(task);
+					
+				}
 			}
 		});
 		bottom.add(sortByTypeButton);
@@ -111,11 +118,18 @@ public class ToDo implements TaskListener, ActionListener {
 
 	}
 
-	public void sortAlphabetically() {
-		tasksAlphabetical.addAll(tasks);
+	public void sortAlphabetically()
+	 {
 		Collections.sort(tasks, new TaskTextComparator());
-		mid.removeAll();
 	}
+private void sortCompleted()
+{
+	for(int i=0; i<tasks.size(); i++)
+	{
+		if(tasks.get(i).isComplete())
+		unCompletedTasks.add(tasks.get(i));
+	}
+}
 
 	public static void main(String[] args) {
 
