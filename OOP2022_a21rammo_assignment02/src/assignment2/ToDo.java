@@ -123,7 +123,7 @@ public class ToDo implements TaskListener, ActionListener {
 	private void sortCompleted() {
 		for (int i = 0; i < tasks.size(); i++) {
 			if (tasks.get(i).isComplete())
-				unCompletedTasks.add(tasks.get(i));
+				completedTasks.add(tasks.get(i));
 		}
 	}
 
