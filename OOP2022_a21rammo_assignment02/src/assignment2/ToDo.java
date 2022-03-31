@@ -47,13 +47,11 @@ public class ToDo implements TaskListener, ActionListener {
 	private JPanel mid, top, bottom, root;
 	private JLabel totalTasks;
 
-
 	private int total = 0, completed = 0;
 	private ArrayList<Task> tasks = new ArrayList<Task>();
 	private ArrayList<Task> tasksAlphabetical = new ArrayList<Task>();
 	private ArrayList<Object> completedTasks = new ArrayList<Object>();
 	private ArrayList<Object> unCompletedTasks = new ArrayList<Object>();
-
 
 	ToDo() {
 		totalTasks = new JLabel();
@@ -62,8 +60,9 @@ public class ToDo implements TaskListener, ActionListener {
 		// Top panel will hold the 3 different types of buttons.
 		top = new JPanel();
 		// Mid panel will hold all the task after one of the create button is clicked
-		mid = new JPanel(); 
-		// Bottom panel will hold the sortings button, 3 different type of sorting buttons.
+		mid = new JPanel();
+		// Bottom panel will hold the sortings button, 3 different type of sorting
+		// buttons.
 		bottom = new JPanel();
 		// Root which will hold our 3 panels will go from a Y-axis, meaning top to down
 		root.setLayout(new BoxLayout(root, BoxLayout.Y_AXIS));
@@ -91,16 +90,15 @@ public class ToDo implements TaskListener, ActionListener {
 		sortByCompButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mid.removeAll();
-				for (int i=0; i<completedTasks.size(); i++)
-				{
-					 taskCreated(completedTasks.get(i));
-					
+				for (int i = 0; i < completedTasks.size(); i++) {
+					taskCreated(completedTasks.get(i));
+
 				}
 			}
 		});
 		bottom.add(sortByTypeButton);
 		sortByAlfButton.addActionListener(new ActionListener() {
-			
+
 			public void actionPerformed(ActionEvent e) {
 				mid.removeAll();
 				sortAlphabetically();
@@ -118,18 +116,16 @@ public class ToDo implements TaskListener, ActionListener {
 
 	}
 
-	public void sortAlphabetically()
-	 {
+	public void sortAlphabetically() {
 		Collections.sort(tasks, new TaskTextComparator());
 	}
-private void sortCompleted()
-{
-	for(int i=0; i<tasks.size(); i++)
-	{
-		if(tasks.get(i).isComplete())
-		unCompletedTasks.add(tasks.get(i));
+
+	private void sortCompleted() {
+		for (int i = 0; i < tasks.size(); i++) {
+			if (tasks.get(i).isComplete())
+				unCompletedTasks.add(tasks.get(i));
+		}
 	}
-}
 
 	public static void main(String[] args) {
 
