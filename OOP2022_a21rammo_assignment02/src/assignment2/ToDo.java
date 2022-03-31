@@ -84,10 +84,12 @@ public class ToDo implements TaskListener, ActionListener {
 				;
 				// System.out.println(tasksAlphabetical.get(0).getText());
 				// System.out.println(tasks.get(0).getText());
-				// System.out.println(tasks.size());
-				for (int i = 0; i < tasksAlphabetical.size(); i++)
+				// System.out.println(homeTask.getText());
+				System.out.println(tasks.get(0).getText());
+				System.out.println(tasks.get(1).getText());
+				for (int i = 0; i < tasks.size(); i++)
 				 {
-					System.out.println(tasksAlphabetical.get(i).getText());
+					System.out.println(tasks.get(i).getText());
 
 				}
 			}
@@ -102,8 +104,8 @@ public class ToDo implements TaskListener, ActionListener {
 
 	private void sortAlphabetically()
 	 {
-		System.out.println(tasksAlphabetical.addAll(tasks));
-		Collections.sort(tasksAlphabetical, new TaskTextComparator());
+		tasksAlphabetical.addAll(tasks);
+		Collections.sort(tasks, new TaskTextComparator());
 		
 		mid.removeAll();
 
