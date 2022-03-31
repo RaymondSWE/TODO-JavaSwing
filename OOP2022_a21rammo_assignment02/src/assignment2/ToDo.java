@@ -46,8 +46,6 @@ public class ToDo implements TaskListener, ActionListener {
 	JFrame frame;
 	JPanel mid;
 	JLabel totalTasks;
-	private JList list = new JList();
-	private DefaultListModel listModel = new DefaultListModel();
 
 	int total = 0, completed = 0;
 	ArrayList<Task> tasks = new ArrayList<Task>();
@@ -62,7 +60,6 @@ public class ToDo implements TaskListener, ActionListener {
 		JPanel top = new JPanel();
 		JPanel bottom = new JPanel();
 		mid = new JPanel();
-		
 
 		root.setLayout(new BoxLayout(root, BoxLayout.Y_AXIS));
 		top.setLayout(new BoxLayout(top, BoxLayout.X_AXIS));
@@ -77,7 +74,6 @@ public class ToDo implements TaskListener, ActionListener {
 		root.add(mid);
 		frame.add(root);
 		frame.add(totalTasks);
-		mid.add(list);
 		HomeTaskbutton.addActionListener(this);
 		StudyTaskbutton.addActionListener(this);
 		CustomTaskbutton.addActionListener(this);
@@ -92,11 +88,15 @@ public class ToDo implements TaskListener, ActionListener {
 				// System.out.println(tasks.get(0).getText());
 				// System.out.println(homeTask.getText());
 				sortAlphabetically();
+
 				System.out.println(tasks.get(0).getText());
 				System.out.println(tasks.get(1).getText());
+
 				for (int i = 0; i < tasks.size(); i++) {
-					tasks.get(i).getText();
+					taskCreated(tasks.get(i));
+
 				}
+
 			}
 		});
 
@@ -105,24 +105,15 @@ public class ToDo implements TaskListener, ActionListener {
 		frame.setBounds(100, 100, 400, 100); // size of frame
 		frame.setVisible(true); // makes the frame visible
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Exit when clicking on closing button (X)
+
 	}
 
-	public void sortAlphabetically(Task t) {
+	public void sortAlphabetically() {
 		tasksAlphabetical.addAll(tasks);
 		Collections.sort(tasks, new TaskTextComparator());
 		mid.removeAll();
-		mid.repaint();
-		mid.add(t.getGuiComponent());
+		// mid.repaint();
 
-	}
-	
-	private void addtoListModel() {
-		for (int i = 0; i < tasks.size(); i++) {
-			listModel.addElement(tasks.get(i));
-			listModel.addElement(tasks.get(i).getGuiComponent());
-			mid.validate();
-		}
-		list.setModel(listModel);
 	}
 
 	public static void main(String[] args) {
