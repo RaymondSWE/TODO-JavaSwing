@@ -125,6 +125,11 @@ public class ToDo implements TaskListener, ActionListener {
 			if (tasks.get(i).isComplete())
 				completedTasks.add(tasks.get(i));
 		}
+	
+	for (int i = 0; i < tasks.size(); i++) {
+		if (!tasks.get(i).isComplete())
+			completedTasks.add(tasks.get(i));
+	}
 	}
 
 	public static void main(String[] args) {
