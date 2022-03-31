@@ -46,7 +46,8 @@ public class ToDo implements TaskListener, ActionListener {
 	JFrame frame;
 	JPanel mid;
 	JLabel totalTasks;
-	
+	private JList list = new JList();
+	private DefaultListModel listModel = new DefaultListModel();
 
 	int total = 0, completed = 0;
 	ArrayList<Task> tasks = new ArrayList<Task>();
@@ -76,6 +77,7 @@ public class ToDo implements TaskListener, ActionListener {
 		root.add(mid);
 		frame.add(root);
 		frame.add(totalTasks);
+		mid.add(list);
 		HomeTaskbutton.addActionListener(this);
 		StudyTaskbutton.addActionListener(this);
 		CustomTaskbutton.addActionListener(this);
@@ -94,8 +96,6 @@ public class ToDo implements TaskListener, ActionListener {
 				System.out.println(tasks.get(1).getText());
 				for (int i = 0; i < tasks.size(); i++) {
 					tasks.get(i).getText();
-				
-
 				}
 			}
 		});
@@ -116,11 +116,12 @@ public class ToDo implements TaskListener, ActionListener {
 	}
 	
 	private void addtoListModel() {
-		DefaultListModel listModel = new DefaultListModel();
 		for (int i = 0; i < tasks.size(); i++) {
 			listModel.addElement(tasks.get(i));
+			listModel.addElement(tasks.get(i).getGuiComponent());
+			mid.validate();
 		}
-		JList list = new JList(listModel);
+		list.setModel(listModel);
 	}
 
 	public static void main(String[] args) {
@@ -148,9 +149,6 @@ public class ToDo implements TaskListener, ActionListener {
 	@Override
 	public void taskCreated(Task t) {
 		// This call the gui component for every task created
-		/*
-		 * tasks.add((Task) t.getGuiComponent()); tasks.add(t);
-		 */
 		mid.add(t.getGuiComponent());
 		frame.validate();
 
