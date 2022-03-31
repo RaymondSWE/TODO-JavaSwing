@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -81,15 +82,15 @@ public class ToDo implements TaskListener, ActionListener {
 		sortByAlfButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				;
 				// System.out.println(tasksAlphabetical.get(0).getText());
 				// System.out.println(tasks.get(0).getText());
 				// System.out.println(homeTask.getText());
+				sortAlphabetically();
 				System.out.println(tasks.get(0).getText());
 				System.out.println(tasks.get(1).getText());
-				for (int i = 0; i < tasks.size(); i++)
-				 {
-					System.out.println(tasks.get(i).getText());
+				for (int i = 0; i < tasks.size(); i++) {
+					tasks.get(i).getText();
+				
 
 				}
 			}
@@ -102,11 +103,17 @@ public class ToDo implements TaskListener, ActionListener {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Exit when clicking on closing button (X)
 	}
 
-	private void sortAlphabetically()
-	 {
+	private void sortAlphabetically() {
 		tasksAlphabetical.addAll(tasks);
-		Collections.sort(tasks, new TaskTextComparator());
-		
+		Collections.sort(tasks, new Comparator<Task>()
+        {
+           public int compare(Task o1, Task o2)
+           {
+               //Task task1=(Task) o1;
+               //Task task2=(Task) o2;
+               return o1.getText().compareTo(o2.getText());
+           }
+       });
 		mid.removeAll();
 
 	}
@@ -165,7 +172,7 @@ public class ToDo implements TaskListener, ActionListener {
 		if (whichButton.getSource().equals(HomeTaskbutton)) {
 			homeTask = new HomeTask();
 			tasks.add(homeTask);
-			
+
 			homeTask.setTaskListener(this);
 			taskCreated(homeTask);
 			this.total++;
