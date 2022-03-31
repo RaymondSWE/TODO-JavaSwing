@@ -104,10 +104,6 @@ public class ToDo implements TaskListener, ActionListener {
 		Collections.sort(tasksAlphabetical, new TaskTextComparator());
 		
 		mid.removeAll();
-		/*
-		 * for(int i = 0; i < tasks.size(); i++) {
-		 * mid.add(tasks.get(i).getGuiComponent()); }
-		 */
 
 	}
 
@@ -168,7 +164,8 @@ public class ToDo implements TaskListener, ActionListener {
 	public void actionPerformed(ActionEvent whichButton) {
 		if (whichButton.getSource().equals(HomeTaskbutton)) {
 			homeTask = new HomeTask();
-			System.out.println(tasks.add(homeTask));
+			tasks.add(homeTask);
+			
 			homeTask.setTaskListener(this);
 			taskCreated(homeTask);
 			this.total++;
