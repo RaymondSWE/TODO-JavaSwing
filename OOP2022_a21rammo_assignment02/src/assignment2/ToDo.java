@@ -35,43 +35,51 @@ import se.his.it401g.todo.TaskListener;
 // Event object describes the event
 public class ToDo implements TaskListener, ActionListener {
 
-	JScrollPane scrollWheel = new JScrollPane();
-	JButton StudyTaskbutton = new JButton("New StudyTask");
-	JButton HomeTaskbutton = new JButton("New HomeTask");
-	JButton CustomTaskbutton = new JButton("New WorkTask");
-	JButton sortByAlfButton = new JButton("Sortering alfabetical");
-	JButton sortByCompButton = new JButton("Sortering by completed");
-	JButton sortByTypeButton = new JButton("Unsorted");
-	Task homeTask, studyTask, customTask;
-	JFrame frame;
-	JPanel mid;
-	JLabel totalTasks;
+	private JScrollPane scrollWheel = new JScrollPane();
+	private JButton StudyTaskbutton = new JButton("New StudyTask");
+	private JButton HomeTaskbutton = new JButton("New HomeTask");
+	private JButton CustomTaskbutton = new JButton("New WorkTask");
+	private JButton sortByAlfButton = new JButton("Sortering alfabetical");
+	private JButton sortByCompButton = new JButton("Sortering by completed");
+	private JButton sortByTypeButton = new JButton("Unsorted");
+	private Task homeTask, studyTask, customTask;
+	private JFrame frame;
+	private JPanel mid, top, bottom, root;
+	private JLabel totalTasks;
 
-	int total = 0, completed = 0;
-	ArrayList<Task> tasks = new ArrayList<Task>();
-	ArrayList<Task> tasksAlphabetical = new ArrayList<Task>();
-	ArrayList<Task> completedTasks = new ArrayList<Task>();
-	ArrayList<Task> unCompletedTasks = new ArrayList<Task>();
+
+	private int total = 0, completed = 0;
+	private ArrayList<Task> tasks = new ArrayList<Task>();
+	private ArrayList<Task> tasksAlphabetical = new ArrayList<Task>();
+	private ArrayList<Object> completedTasks = new ArrayList<Object>();
+	private ArrayList<Object> unCompletedTasks = new ArrayList<Object>();
+
 
 	ToDo() {
 		totalTasks = new JLabel();
 		frame = new JFrame(); // Creates a frame
-		JPanel root = new JPanel();
-		JPanel top = new JPanel();
-		JPanel bottom = new JPanel();
-		mid = new JPanel();
-
+		root = new JPanel();
+		// Top panel will hold the 3 different types of buttons.
+		top = new JPanel();
+		// Mid panel will hold all the task after one of the create button is clicked
+		mid = new JPanel(); 
+		// Bottom panel will hold the sortings button, 3 different type of sorting buttons.
+		bottom = new JPanel();
+		// Root which will hold our 3 panels will go from a Y-axis, meaning top to down
 		root.setLayout(new BoxLayout(root, BoxLayout.Y_AXIS));
+		// Top layout will go from left to right because of X axis boxlayout
 		top.setLayout(new BoxLayout(top, BoxLayout.X_AXIS));
+		// Mid layout which hold the task created goes from up towards down.
 		mid.setLayout(new BoxLayout(mid, BoxLayout.Y_AXIS));
 		frame.setTitle("Task management");
 		top.add(HomeTaskbutton);
-		top.add(Box.createHorizontalStrut(10)); // works like margin from css
+		top.add(Box.createHorizontalStrut(10)); // works like margin from css, creating space
 		top.add(StudyTaskbutton);
 		top.add(Box.createHorizontalStrut(10));
 		top.add(CustomTaskbutton, BorderLayout.NORTH);
 		root.add(top);
 		root.add(mid);
+		root.add(scrollWheel);
 		frame.add(root);
 		frame.add(totalTasks);
 		HomeTaskbutton.addActionListener(this);
@@ -84,7 +92,7 @@ public class ToDo implements TaskListener, ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				mid.removeAll();
 				for (int i=0; i<completedTasks.size(); i++)
-				 {
+				{
 					 taskCreated(completedTasks.get(i));
 					
 				}
@@ -164,7 +172,6 @@ private void sortCompleted()
 		this.total--;
 		if (this.completed > 0) {
 			this.completed--;
-
 		}
 		totalTasks.setText("Total task completed: " + this.completed + "/" + this.total);
 		frame.validate();
