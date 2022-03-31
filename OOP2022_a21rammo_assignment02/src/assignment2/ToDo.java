@@ -51,8 +51,8 @@ public class ToDo implements TaskListener, ActionListener {
 	private int total = 0, completed = 0;
 	private ArrayList<Task> tasks = new ArrayList<Task>();
 	private ArrayList<Task> tasksAlphabetical = new ArrayList<Task>();
-	private ArrayList<Object> completedTasks = new ArrayList<Object>();
-	private ArrayList<Object> unCompletedTasks = new ArrayList<Object>();
+	private ArrayList<Task> completedTasks = new ArrayList<Task>();
+	private ArrayList<Task> unCompletedTasks = new ArrayList<Task>();
 
 
 	ToDo() {
