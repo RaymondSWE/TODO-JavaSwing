@@ -113,10 +113,6 @@ public class ToDo implements TaskListener, ActionListener {
 
 	}
 
-	private void unSorted() {
-
-	}
-
 	public static void main(String[] args) {
 
 		ToDo t = new ToDo();
