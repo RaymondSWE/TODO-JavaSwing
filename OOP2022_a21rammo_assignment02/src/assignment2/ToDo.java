@@ -91,7 +91,11 @@ public class ToDo implements TaskListener, ActionListener {
 				// System.out.println(tasks.get(0).getText());
 				// System.out.println(homeTask.getText());
 				sortAlphabetically();
-frame.add(pane);
+				for(int i=0;  i<Tasks.size(); i++)
+				{
+					taskCreated(tasks.get(i));
+
+				}
 			}
 		});
 
