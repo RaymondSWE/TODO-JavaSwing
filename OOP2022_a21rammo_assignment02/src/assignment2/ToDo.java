@@ -14,6 +14,7 @@ import java.util.Comparator;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -21,6 +22,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.ListModel;
 import javax.swing.SwingConstants;
 
 import se.his.it401g.todo.HomeTask;
@@ -44,6 +46,7 @@ public class ToDo implements TaskListener, ActionListener {
 	JFrame frame;
 	JPanel mid;
 	JLabel totalTasks;
+	
 
 	int total = 0, completed = 0;
 	ArrayList<Task> tasks = new ArrayList<Task>();
@@ -58,6 +61,7 @@ public class ToDo implements TaskListener, ActionListener {
 		JPanel top = new JPanel();
 		JPanel bottom = new JPanel();
 		mid = new JPanel();
+		
 
 		root.setLayout(new BoxLayout(root, BoxLayout.Y_AXIS));
 		top.setLayout(new BoxLayout(top, BoxLayout.X_AXIS));
@@ -105,17 +109,18 @@ public class ToDo implements TaskListener, ActionListener {
 
 	private void sortAlphabetically() {
 		tasksAlphabetical.addAll(tasks);
-		Collections.sort(tasks, new Comparator<Task>()
-        {
-           public int compare(Task o1, Task o2)
-           {
-               //Task task1=(Task) o1;
-               //Task task2=(Task) o2;
-               return o1.getText().compareTo(o2.getText());
-           }
-       });
+
+		Collections.sort(tasks, new TaskTextComparator());
 		mid.removeAll();
 
+	}
+	
+	private void addtoListModel() {
+		DefaultListModel listModel = new DefaultListModel();
+		for (int i = 0; i < tasks.size(); i++) {
+			listModel.addElement(tasks.get(i));
+		}
+		JList list = new JList(listModel);
 	}
 
 	public static void main(String[] args) {
