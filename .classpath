@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="OOP2022_a21rammo_assignment02/src"/>
+	<classpathentry kind="lib" path="OOP2022_a21rammo_assignment02/lib/ToDo.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="OOP2022_a21rammo_assignment02/bin"/>
+</classpath>
