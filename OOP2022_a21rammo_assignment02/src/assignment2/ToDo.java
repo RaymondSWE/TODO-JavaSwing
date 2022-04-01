@@ -36,7 +36,6 @@ import se.his.it401g.todo.TaskListener;
 // Event object describes the event
 public class ToDo implements TaskListener, ActionListener {
 
-
 	private JButton StudyTaskbutton = new JButton("New StudyTask");
 	private JButton HomeTaskbutton = new JButton("New HomeTask");
 	private JButton CustomTaskbutton = new JButton("New WorkTask");
@@ -52,8 +51,7 @@ public class ToDo implements TaskListener, ActionListener {
 	private ArrayList<Task> tasks = new ArrayList<Task>();
 	private ArrayList<Task> taskTypes = new ArrayList<Task>();
 	private ArrayList<Task> completedTasks = new ArrayList<Task>();
-	private ArrayList<Task> unCompletedTasks = new ArrayList<Task>();
-private String chozenTaskType;
+
 
 	ToDo() {
 		totalTasks = new JLabel();
@@ -89,20 +87,17 @@ private String chozenTaskType;
 		bottom.add(sortByTypeButton);
 
 		sortByTypeButton.addActionListener(new ActionListener() {
-		
+
 			public void actionPerformed(ActionEvent e) {
 				mid.removeAll();
 				sortByType();
 
-
-
-				for(int i=0; i<taskTypes.size(); i++)
-				{
+				for (int i = 0; i < taskTypes.size(); i++) {
 					taskCreated(taskTypes.get(i));
 				}
 			}
 		});
-	
+
 		bottom.add(sortByCompButton);
 		sortByCompButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -148,28 +143,25 @@ private String chozenTaskType;
 				completedTasks.add(tasks.get(i));
 		}
 	}
-private void sortByType()
-{
-	String studyType="Study";
-	String homeType="Home";
-	String customType="Work";
-	for(int i=0; i<tasks.size(); i++)
-	{
-		if(tasks.get(i).getTaskType().equals(homeType))
-		taskTypes.add(tasks.get(i));
-	}
-	for(int i=0; i<tasks.size(); i++)
-	{
-		if(tasks.get(i).getTaskType().equals(customType))
-		taskTypes.add(tasks.get(i));
-	}
-	for(int i=0; i<tasks.size(); i++)
-	{
-		if(tasks.get(i).getTaskType().equals(studyType))
-		taskTypes.add(tasks.get(i));
-	}
 
-}
+	private void sortByType() {
+		String studyType = "Study";
+		String homeType = "Home";
+		String customType = "Work";
+		for (int i = 0; i < tasks.size(); i++) {
+			if (tasks.get(i).getTaskType().equals(homeType))
+				taskTypes.add(tasks.get(i));
+		}
+		for (int i = 0; i < tasks.size(); i++) {
+			if (tasks.get(i).getTaskType().equals(customType))
+				taskTypes.add(tasks.get(i));
+		}
+		for (int i = 0; i < tasks.size(); i++) {
+			if (tasks.get(i).getTaskType().equals(studyType))
+				taskTypes.add(tasks.get(i));
+		}
+
+	}
 
 	public static void main(String[] args) {
 
@@ -196,8 +188,9 @@ private void sortByType()
 	@Override
 	public void taskCreated(Task t) {
 		// This call the gui component for every task created
-		//mid.add(t.getGuiComponent());
-		JScrollPane scrollWheel = new JScrollPane(t.getGuiComponent(), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		// mid.add(t.getGuiComponent());
+		JScrollPane scrollWheel = new JScrollPane(t.getGuiComponent(), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		mid.add(scrollWheel);
 		frame.validate();
 
