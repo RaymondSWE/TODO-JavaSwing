@@ -227,7 +227,7 @@ private void sortByType()
 		}
 		if (whichButton.getSource().equals(StudyTaskbutton)) {
 			studyTask = new StudyTask();
-			// tasks.add(studyTask);
+			 tasks.add(studyTask);
 			studyTask.setTaskListener(this);
 			taskCreated(studyTask);
 			this.total++;
