@@ -42,6 +42,7 @@ public class ToDo implements TaskListener, ActionListener {
 	private ArrayList<Task> tasks = new ArrayList<Task>();
 	private ArrayList<Task> taskTypes = new ArrayList<Task>();
 	private ArrayList<Task> completedTasks = new ArrayList<Task>();
+private Boolean completedBtnPressed=true;
 
 	ToDo() {
 		totalTasks = new JLabel();
@@ -91,12 +92,26 @@ public class ToDo implements TaskListener, ActionListener {
 
 		bottom.add(sortByCompButton);
 		sortByCompButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e)
+			{
+				if(completedBtnPressed)
+				{
 				mid.removeAll();
 				sortCompleted();
 				for (int i = 0; i < completedTasks.size(); i++) {
 					taskCreated(completedTasks.get(i));
 				}
+				completedBtnPressed=false;
+			}
+			else
+			{
+				completedBtnPressed=false;
+				Collections.reverse(completedTasks);
+				mid.removeAll();
+				for(int i=0; i<completedTasks.size(); i++)
+				taskCreated(completedTasks.get(i));
+
+			}
 			}
 		});
 		bottom.add(sortByAlfButton);
