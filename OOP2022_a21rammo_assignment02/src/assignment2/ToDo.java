@@ -42,7 +42,7 @@ public class ToDo implements TaskListener, ActionListener {
 	private ArrayList<Task> tasks = new ArrayList<Task>();
 	private ArrayList<Task> taskTypes = new ArrayList<Task>();
 	private ArrayList<Task> completedTasks = new ArrayList<Task>();
-private Boolean completedBtnPressed=true;
+	private Boolean completedBtnPressed = true;
 
 	ToDo() {
 		totalTasks = new JLabel();
@@ -92,26 +92,22 @@ private Boolean completedBtnPressed=true;
 
 		bottom.add(sortByCompButton);
 		sortByCompButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e)
-			{
-				if(completedBtnPressed)
-				{
-				mid.removeAll();
-				sortCompleted();
-				for (int i = 0; i < completedTasks.size(); i++) {
-					taskCreated(completedTasks.get(i));
-				}
-				completedBtnPressed=false;
-			}
-			else
-			{
-				completedBtnPressed=false;
-				Collections.reverse(completedTasks);
-				mid.removeAll();
-				for(int i=0; i<completedTasks.size(); i++)
-				taskCreated(completedTasks.get(i));
+			public void actionPerformed(ActionEvent e) {
+				if (completedBtnPressed) {
+					mid.removeAll();
+					sortCompleted();
+					for (int i = 0; i < completedTasks.size(); i++) {
+						taskCreated(completedTasks.get(i));
+					}
+					completedBtnPressed = false;
+				} else {
+					completedBtnPressed = false;
+					Collections.reverse(completedTasks);
+					mid.removeAll();
+					for (int i = 0; i < completedTasks.size(); i++)
+						taskCreated(completedTasks.get(i));
 
-			}
+				}
 			}
 		});
 		bottom.add(sortByAlfButton);
@@ -125,7 +121,6 @@ private Boolean completedBtnPressed=true;
 				}
 			}
 		});
-		
 
 		frame.setMinimumSize(new Dimension(450, 300));
 		frame.setLayout(new FlowLayout());
@@ -196,7 +191,7 @@ private Boolean completedBtnPressed=true;
 	public void taskCreated(Task t) {
 		// This call the gui component for every task created
 		mid.add(t.getGuiComponent());
-	
+
 		frame.validate();
 
 	}
@@ -230,7 +225,7 @@ private Boolean completedBtnPressed=true;
 		}
 		if (whichButton.getSource().equals(StudyTaskbutton)) {
 			studyTask = new StudyTask();
-			 tasks.add(studyTask);
+			tasks.add(studyTask);
 			studyTask.setTaskListener(this);
 			taskCreated(studyTask);
 			this.total++;
