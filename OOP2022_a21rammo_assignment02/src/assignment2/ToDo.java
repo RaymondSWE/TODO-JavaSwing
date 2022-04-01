@@ -1,30 +1,20 @@
 package assignment2;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.ListModel;
-import javax.swing.SwingConstants;
 
 import se.his.it401g.todo.HomeTask;
 import se.his.it401g.todo.StudyTask;
@@ -46,19 +36,20 @@ public class ToDo implements TaskListener, ActionListener {
 	private JFrame frame;
 	private JPanel mid, top, bottom, root;
 	private JLabel totalTasks;
+	private JLabel titleText = new JLabel("To Do List");
 
 	private int total = 0, completed = 0;
 	private ArrayList<Task> tasks = new ArrayList<Task>();
 	private ArrayList<Task> taskTypes = new ArrayList<Task>();
 	private ArrayList<Task> completedTasks = new ArrayList<Task>();
 
-
 	ToDo() {
 		totalTasks = new JLabel();
-		frame = new JFrame(); // Creates a frame
+		frame = new JFrame("Task management"); // Creates a frame
 		root = new JPanel();
 		// Top panel will hold the 3 different types of buttons.
 		top = new JPanel();
+
 		// Mid panel will hold all the task after one of the create button is clicked
 		mid = new JPanel();
 		// Bottom panel will hold the sortings button, 3 different type of sorting
@@ -70,7 +61,7 @@ public class ToDo implements TaskListener, ActionListener {
 		top.setLayout(new BoxLayout(top, BoxLayout.X_AXIS));
 		// Mid layout which hold the task created goes from up towards down.
 		mid.setLayout(new BoxLayout(mid, BoxLayout.Y_AXIS));
-		frame.setTitle("Task management");
+		root.add(titleText);
 		top.add(HomeTaskbutton);
 		top.add(Box.createHorizontalStrut(10)); // works like margin from css, creating space
 		top.add(StudyTaskbutton);
@@ -119,6 +110,7 @@ public class ToDo implements TaskListener, ActionListener {
 				}
 			}
 		});
+		
 
 		frame.setMinimumSize(new Dimension(450, 300));
 		frame.setLayout(new FlowLayout());
@@ -188,10 +180,8 @@ public class ToDo implements TaskListener, ActionListener {
 	@Override
 	public void taskCreated(Task t) {
 		// This call the gui component for every task created
-		// mid.add(t.getGuiComponent());
-		JScrollPane scrollWheel = new JScrollPane(t.getGuiComponent(), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		mid.add(scrollWheel);
+		mid.add(t.getGuiComponent());
+	
 		frame.validate();
 
 	}
