@@ -20,7 +20,6 @@ import se.his.it401g.todo.Task;
 import se.his.it401g.todo.TaskInputListener;
 import se.his.it401g.todo.TaskListener;
 
-
 public class CustomTask extends JPanel implements Task {
 
 	/**
@@ -37,7 +36,6 @@ public class CustomTask extends JPanel implements Task {
 	 * Check box holding the completion status.
 	 */
 	JCheckBox completed = new JCheckBox();
-	
 
 	/**
 	 * Check box holding the important status.
@@ -76,62 +74,69 @@ public class CustomTask extends JPanel implements Task {
 		completed.addItemListener(inputListener);
 
 		add(important, BorderLayout.SOUTH);
-		important.addItemListener(new ItemListener(){
-            public void itemStateChanged(ItemEvent e){
-                if(important.isSelected()) {
+		important.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				if (important.isSelected()) {
 					setBackground(Color.red);
 					center.setBackground(Color.red);
 					completed.setBackground(Color.red);
 					important.setBackground(Color.red);
-                }
-                else {
-                	setBackground(standard);
-                	center.setBackground(standard);
+				} else {
+					setBackground(standard);
+					center.setBackground(standard);
 					completed.setBackground(standard);
 					important.setBackground(standard);
-                }
-                   
-            }
-        }
-    );
+				}
+
+			}
+		});
 
 		setMaximumSize(new Dimension(1000, 100));
 		setBorder(new TitledBorder(getTaskType()));
 	}
 
+	// this function returns the task Text. it takes no input and returns a String.
 	@Override
 	public String getText() {
 		return text.getText();
 	}
 
+	// this function returns the task type. it takes no input and returns a String.
 	@Override
 	public String getTaskType() {
 		return "Work";
 	}
 
+	// this function sets the task listener. It takes an object of type TaskListener
+	// as input.
 	@Override
 	public void setTaskListener(TaskListener t) {
 		listener = t;
 	}
 
+	// this function returns an Object of type Task listener. it takes no input.
 	@Override
 	public TaskListener getTaskListener() {
 		return listener;
 	}
 
+	// this function returns the completed status of a task. It takes no input and
+	// returns a boolean.
 	@Override
 	public boolean isComplete() {
 		return completed.isSelected();
 	}
-	
+
+	// this function returns the important status of a task. It takes no input and
+	// returns a boolean.
 	public boolean isImportant() {
 		return important.isSelected();
 	}
 
+	// Since this class extends JPanel, it is itself a GUI component, and thus we
+	// can return "this".
 	@Override
 	public Component getGuiComponent() {
-		// Since this class extends JPanel, it is itself a GUI component, and thus we
-		// can return "this".
 		return this;
 	}
 }
