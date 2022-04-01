@@ -1,30 +1,20 @@
 package assignment2;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.ListModel;
-import javax.swing.SwingConstants;
 
 import se.his.it401g.todo.HomeTask;
 import se.his.it401g.todo.StudyTask;
@@ -36,7 +26,6 @@ import se.his.it401g.todo.TaskListener;
 // Event object describes the event
 public class ToDo implements TaskListener, ActionListener {
 
-	private JScrollPane scrollWheel = new JScrollPane();
 	private JButton StudyTaskbutton = new JButton("New StudyTask");
 	private JButton HomeTaskbutton = new JButton("New HomeTask");
 	private JButton CustomTaskbutton = new JButton("New WorkTask");
@@ -47,20 +36,20 @@ public class ToDo implements TaskListener, ActionListener {
 	private JFrame frame;
 	private JPanel mid, top, bottom, root;
 	private JLabel totalTasks;
+	private JLabel titleText = new JLabel("To Do List");
 
 	private int total = 0, completed = 0;
 	private ArrayList<Task> tasks = new ArrayList<Task>();
 	private ArrayList<Task> taskTypes = new ArrayList<Task>();
 	private ArrayList<Task> completedTasks = new ArrayList<Task>();
-	private ArrayList<Task> unCompletedTasks = new ArrayList<Task>();
-private String chozenTaskType;
 
 	ToDo() {
 		totalTasks = new JLabel();
-		frame = new JFrame(); // Creates a frame
+		frame = new JFrame("Task management"); // Creates a frame
 		root = new JPanel();
 		// Top panel will hold the 3 different types of buttons.
 		top = new JPanel();
+
 		// Mid panel will hold all the task after one of the create button is clicked
 		mid = new JPanel();
 		// Bottom panel will hold the sortings button, 3 different type of sorting
@@ -72,7 +61,7 @@ private String chozenTaskType;
 		top.setLayout(new BoxLayout(top, BoxLayout.X_AXIS));
 		// Mid layout which hold the task created goes from up towards down.
 		mid.setLayout(new BoxLayout(mid, BoxLayout.Y_AXIS));
-		frame.setTitle("Task management");
+		root.add(titleText);
 		top.add(HomeTaskbutton);
 		top.add(Box.createHorizontalStrut(10)); // works like margin from css, creating space
 		top.add(StudyTaskbutton);
@@ -87,18 +76,19 @@ private String chozenTaskType;
 		CustomTaskbutton.addActionListener(this);
 		root.add(bottom);
 		bottom.add(sortByTypeButton);
+
 		sortByTypeButton.addActionListener(new ActionListener() {
-		
+
 			public void actionPerformed(ActionEvent e) {
 				mid.removeAll();
+				sortByType();
 
-				for(int i=0; i<taskTypes.size(); i++)
-				{
+				for (int i = 0; i < taskTypes.size(); i++) {
 					taskCreated(taskTypes.get(i));
 				}
 			}
 		});
-	
+
 		bottom.add(sortByCompButton);
 		sortByCompButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -106,7 +96,6 @@ private String chozenTaskType;
 				sortCompleted();
 				for (int i = 0; i < completedTasks.size(); i++) {
 					taskCreated(completedTasks.get(i));
-
 				}
 			}
 		});
@@ -121,6 +110,7 @@ private String chozenTaskType;
 				}
 			}
 		});
+		
 
 		frame.setMinimumSize(new Dimension(450, 300));
 		frame.setLayout(new FlowLayout());
@@ -145,28 +135,25 @@ private String chozenTaskType;
 				completedTasks.add(tasks.get(i));
 		}
 	}
-private void sortByType()
-{
-	String studyType="Study";
-	String homeType="Home";
-	String customType="Work";
-	for(int i=0; i<tasks.size(); i++)
-	{
-		if(tasks.get(i).getTaskType().equals(homeType))
-		taskTypes.add(tasks.get(i));
-	}
-	for(int i=0; i<tasks.size(); i++)
-	{
-		if(tasks.get(i).getTaskType().equals(customType))
-		taskTypes.add(tasks.get(i));
-	}
-	for(int i=0; i<tasks.size(); i++)
-	{
-		if(tasks.get(i).getTaskType().equals(studyType))
-		taskTypes.add(tasks.get(i));
-	}
 
-}
+	private void sortByType() {
+		String studyType = "Study";
+		String homeType = "Home";
+		String customType = "Work";
+		for (int i = 0; i < tasks.size(); i++) {
+			if (tasks.get(i).getTaskType().equals(homeType))
+				taskTypes.add(tasks.get(i));
+		}
+		for (int i = 0; i < tasks.size(); i++) {
+			if (tasks.get(i).getTaskType().equals(customType))
+				taskTypes.add(tasks.get(i));
+		}
+		for (int i = 0; i < tasks.size(); i++) {
+			if (tasks.get(i).getTaskType().equals(studyType))
+				taskTypes.add(tasks.get(i));
+		}
+
+	}
 
 	public static void main(String[] args) {
 
@@ -194,6 +181,7 @@ private void sortByType()
 	public void taskCreated(Task t) {
 		// This call the gui component for every task created
 		mid.add(t.getGuiComponent());
+	
 		frame.validate();
 
 	}
