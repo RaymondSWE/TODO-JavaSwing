@@ -90,6 +90,7 @@ private String chozenTaskType;
 		sortByTypeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mid.removeAll();
+				sortByType();
 				for(int i=0; i<taskTypes.size(); i++)
 				{
 					taskCreated(taskTypes.get(i));
