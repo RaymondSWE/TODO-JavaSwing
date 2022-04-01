@@ -7,7 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
-
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -15,7 +14,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-
 import se.his.it401g.todo.HomeTask;
 import se.his.it401g.todo.StudyTask;
 import se.his.it401g.todo.Task;
@@ -42,7 +40,7 @@ public class ToDo implements TaskListener, ActionListener {
 	private ArrayList<Task> tasks = new ArrayList<Task>();
 	private ArrayList<Task> taskTypes = new ArrayList<Task>();
 	private ArrayList<Task> completedTasks = new ArrayList<Task>();
-private Boolean completedBtnPressed=true;
+	private Boolean completedBtnPressed = true;
 
 	ToDo() {
 		totalTasks = new JLabel();
@@ -50,7 +48,6 @@ private Boolean completedBtnPressed=true;
 		root = new JPanel();
 		// Top panel will hold the 3 different types of buttons.
 		top = new JPanel();
-
 		// Mid panel will hold all the task after one of the create button is clicked
 		mid = new JPanel();
 		// Bottom panel will hold the sortings button, 3 different type of sorting
@@ -77,9 +74,10 @@ private Boolean completedBtnPressed=true;
 		CustomTaskbutton.addActionListener(this);
 		root.add(bottom);
 		bottom.add(sortByTypeButton);
-
+		// this action listener is connected to the sortType button. It removes all
+		// tasks, sorts them by type and adds them back in to the GUI according to the
+		// sorted order.
 		sortByTypeButton.addActionListener(new ActionListener() {
-
 			public void actionPerformed(ActionEvent e) {
 				mid.removeAll();
 				sortByType();
@@ -92,31 +90,36 @@ private Boolean completedBtnPressed=true;
 
 		bottom.add(sortByCompButton);
 		sortByCompButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e)
-			{
-				if(completedBtnPressed)
-				{
-				mid.removeAll();
-				sortCompleted();
-				for (int i = 0; i < completedTasks.size(); i++) {
-					taskCreated(completedTasks.get(i));
-				}
-				completedBtnPressed=false;
-			}
-			else
-			{
-				completedBtnPressed=false;
-				Collections.reverse(completedTasks);
-				mid.removeAll();
-				for(int i=0; i<completedTasks.size(); i++)
-				taskCreated(completedTasks.get(i));
+			// this action listener is connected to the sortCompleted button. It removes all
+			// tasks, sorts them by completed and adds them back in to the GUI according to
+			// the sorted order. If the user presses this bnutton again the sorting is
+			// reversed and added in to the GUI again so that the user sees the non
+			// completed tasks first.
 
-			}
+			public void actionPerformed(ActionEvent e) {
+				if (completedBtnPressed) {
+					mid.removeAll();
+					sortCompleted();
+					for (int i = 0; i < completedTasks.size(); i++) {
+						taskCreated(completedTasks.get(i));
+					}
+					completedBtnPressed = false;
+				} else {
+					completedBtnPressed = false;
+					Collections.reverse(completedTasks);
+					mid.removeAll();
+					for (int i = 0; i < completedTasks.size(); i++)
+						taskCreated(completedTasks.get(i));
+
+				}
 			}
 		});
 		bottom.add(sortByAlfButton);
-		sortByAlfButton.addActionListener(new ActionListener() {
+		// this action listener is connected to the sortAlphabetical button. It removes
+		// all tasks, sorts them in an alphabetical order and adds them back in to the
+		// GUI.
 
+		sortByAlfButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mid.removeAll();
 				sortAlphabetically();
@@ -125,20 +128,20 @@ private Boolean completedBtnPressed=true;
 				}
 			}
 		});
-		
-
 		frame.setMinimumSize(new Dimension(450, 300));
 		frame.setLayout(new FlowLayout());
 		frame.setBounds(100, 100, 400, 100); // size of frame
 		frame.setVisible(true); // makes the frame visible
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Exit when clicking on closing button (X)
-
 	}
 
-	public void sortAlphabetically() {
+	// this function sorts the task in an alphabetical order. It takes no input.
+	private void sortAlphabetically() {
 		Collections.sort(tasks, new TaskTextComparator());
 	}
 
+	// this function sorts the tasks by completed where the completed once are
+	// first. It takes no input.
 	private void sortCompleted() {
 		for (int i = 0; i < tasks.size(); i++) {
 			if (tasks.get(i).isComplete())
@@ -151,6 +154,8 @@ private Boolean completedBtnPressed=true;
 		}
 	}
 
+	// this function sorts tasks in a specific order based on type. It takes no
+	// input
 	private void sortByType() {
 		String studyType = "Study";
 		String homeType = "Home";
@@ -176,38 +181,36 @@ private Boolean completedBtnPressed=true;
 
 	}
 
-	// This is connected to the checkerbox where if the user clickes on it, the
-	// completed on statusbar increase with 1
+	// This is connected to a checkbox where if the user selects it, The completed
+	// amount on the status bar increases by 1. It takes an object of type Task as
+	// input.
 	@Override
 	public void taskCompleted(Task t) {
 		this.completed++;
 		totalTasks.setText("Total task completed: " + this.completed + "/" + this.total);
 	}
 
+	// This is also connected to a check box, but instead of the status bar
+	// increasing it decreases when user unselects the check box. It takes an object
+	// of Type Task as input.
 	@Override
 	public void taskUncompleted(Task t) {
-		// This is also connected to the checker box, but instead of the statusbar
-		// increaing it will decrease when user unclicks the checker box
 		this.completed--;
 		totalTasks.setText("Total task completed: " + this.completed + "/" + this.total);
 	}
 
+	// this function adds the Tasks to the GUI. It takes An object of type Task as
+	// input.
 	@Override
 	public void taskCreated(Task t) {
-		// This call the gui component for every task created
 		mid.add(t.getGuiComponent());
-	
 		frame.validate();
-
 	}
 
-	public void taskImportant() {
-
-	}
-
+	// this function is responsible for removing a task from the GUI. It takes an
+	// object of type Task as input.
 	@Override
 	public void taskRemoved(Task t) {
-		// TODO Auto-generated method stub
 		mid.remove(t.getGuiComponent());
 		this.total--;
 		if (this.completed > 0) {
@@ -217,6 +220,8 @@ private Boolean completedBtnPressed=true;
 		frame.validate();
 	}
 
+	// this function is responsible for creating new tasks when the user wants to
+	// add a task.
 	public void actionPerformed(ActionEvent whichButton) {
 		if (whichButton.getSource().equals(HomeTaskbutton)) {
 			homeTask = new HomeTask();
@@ -230,18 +235,18 @@ private Boolean completedBtnPressed=true;
 		}
 		if (whichButton.getSource().equals(StudyTaskbutton)) {
 			studyTask = new StudyTask();
-			 tasks.add(studyTask);
 			studyTask.setTaskListener(this);
 			taskCreated(studyTask);
+			tasks.add(studyTask);
 			this.total++;
 			this.totalTasks.setText("Total task completed: " + this.completed + "/" + this.total);
 			frame.validate();
 		}
 		if (whichButton.getSource().equals(CustomTaskbutton)) {
 			customTask = new CustomTask();
-			tasks.add(customTask);
 			taskCreated(customTask); // Has to refresh everytime clicking new task
 			customTask.setTaskListener(this);
+			tasks.add(customTask);
 			this.total++;
 			this.totalTasks.setText("Total task completed: " + this.completed + "/" + this.total);
 			frame.validate();
